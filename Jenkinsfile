@@ -25,7 +25,10 @@ pipeline {
                 withSonarQubeEnv('sonar-local') {
                    sh 'gradle sonar'
                 }
-                waitForQualityGate abortPipeline: true
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+
            }
         }
     }
