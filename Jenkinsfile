@@ -4,13 +4,14 @@ pipeline {
     tools {
         gradle "gradle"
         git "Default"
+        jdk "jdk17"
     }
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'gradle build -x test'
+                sh 'gradle clean build -x test'
             }
         }
         stage('Test') {
