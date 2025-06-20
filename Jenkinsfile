@@ -20,6 +20,14 @@ pipeline {
                 sh 'gradle test'
             }
         }
+        stage('Quality') {
+          steps {
+                withSonarQubeEnv('sonar-local') {
+                   sh 'gradle sonar'
+                }
+                waitForQualityGate abortPipeline: true
+           }
+        }
     }
 
     post {
